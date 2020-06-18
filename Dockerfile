@@ -23,5 +23,3 @@ USER ${NB_USER}
 
 RUN pip install -e ${HOME}/app
 RUN pip install jupyter
-
-WORKDIR ${HOME}/app

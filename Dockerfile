@@ -23,5 +23,5 @@ RUN pip install -e ${HOME}/app jupyter
 RUN chown -R ${NB_UID} ${HOME}
 USER ${NB_USER}
 # RUN pip install -e ${HOME}/app
-WORKDIR /app
+WORKDIR ${HOME}/app
 CMD /usr/local/bin/jupyter notebook --ip 0.0.0.0 --NotebookApp.token='' --allow-root

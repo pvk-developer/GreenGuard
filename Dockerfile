@@ -21,6 +21,7 @@ USER root
 RUN chown -R ${NB_UID} ${HOME}
 USER ${NB_USER}
 
-RUN pip install -e ${HOME}/app jupyter
+RUN pip install -e ${HOME}/app
+RUN pip install jupyter
 
 WORKDIR ${HOME}/app

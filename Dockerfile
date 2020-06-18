@@ -13,13 +13,15 @@ RUN adduser --disabled-password \
 
 EXPOSE 8888
 
+RUN pip install jupyter
 RUN mkdir ${HOME}/app
 COPY setup.py ${HOME}/app
 COPY greenguard ${HOME}/app/greenguard
 COPY notebooks ${HOME}/app/notebooks
 USER root
+RUN pip install -e ${HOME}/app jupyter
 RUN chown -R ${NB_UID} ${HOME}
 USER ${NB_USER}
-
-RUN pip install -e ${HOME}/app
-RUN pip install jupyter
+# RUN pip install -e ${HOME}/app
+WORKDIR /app
+CMD /usr/local/bin/jupyter notebook --ip 0.0.0.0 --NotebookApp.token='' --allow-root

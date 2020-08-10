@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>greenguard.db &mdash; GreenGuard 0.2.3.dev0 documentation</title>
+  <title>greenguard.metrics &mdash; GreenGuard 0.2.3.dev0 documentation</title>
   
 
   
@@ -264,7 +264,7 @@
         
           <li><a href="../index.html">Module code</a> &raquo;</li>
         
-      <li>greenguard.db</li>
+      <li>greenguard.metrics</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -279,85 +279,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for greenguard.db</h1><div class="highlight"><pre>
+  <h1>Source code for greenguard.metrics</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="kn">import</span> <span class="nn">getpass</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-
-<span class="kn">from</span> <span class="nn">pymongo</span> <span class="kn">import</span> <span class="n">MongoClient</span>
-
-<span class="kn">from</span> <span class="nn">greenguard.utils</span> <span class="kn">import</span> <span class="n">remove_dots</span><span class="p">,</span> <span class="n">restore_dots</span>
-
-<span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">mean_absolute_error</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="MongoDB"><a class="viewcode-back" href="../../api/greenguard.db.html#greenguard.db.MongoDB">[docs]</a><span class="k">class</span> <span class="nc">MongoDB</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="f1_macro"><a class="viewcode-back" href="../../api/greenguard.metrics.html#greenguard.metrics.f1_macro">[docs]</a><span class="k">def</span> <span class="nf">f1_macro</span><span class="p">(</span><span class="n">exp</span><span class="p">,</span> <span class="n">obs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">exp</span><span class="p">,</span> <span class="n">obs</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">config</span><span class="p">:</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">config</span> <span class="o">=</span> <span class="n">kwargs</span>
 
-        <span class="n">host</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;host&#39;</span><span class="p">,</span> <span class="s1">&#39;localhost&#39;</span><span class="p">)</span>
-        <span class="n">port</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;port&#39;</span><span class="p">,</span> <span class="mi">27017</span><span class="p">)</span>
-        <span class="n">user</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)</span>
-        <span class="n">password</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
-        <span class="n">database</span> <span class="o">=</span> <span class="n">database</span> <span class="ow">or</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;database&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">)</span>
-        <span class="n">auth_database</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;auth_database&#39;</span><span class="p">,</span> <span class="s1">&#39;admin&#39;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">user</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">password</span><span class="p">:</span>
-            <span class="n">password</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(</span><span class="n">prompt</span><span class="o">=</span><span class="s1">&#39;Please insert database password: &#39;</span><span class="p">)</span>
-
-        <span class="n">client</span> <span class="o">=</span> <span class="n">MongoClient</span><span class="p">(</span>
-            <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span>
-            <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span>
-            <span class="n">username</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
-            <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">,</span>
-            <span class="n">authSource</span><span class="o">=</span><span class="n">auth_database</span>
-        <span class="p">)</span>
-
-        <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Setting up a MongoClient </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">client</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_db</span> <span class="o">=</span> <span class="n">client</span><span class="p">[</span><span class="n">database</span><span class="p">]</span>
-
-<div class="viewcode-block" id="MongoDB.load_template"><a class="viewcode-back" href="../../api/greenguard.db.html#greenguard.db.MongoDB.load_template">[docs]</a>    <span class="k">def</span> <span class="nf">load_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_name</span><span class="p">):</span>
-        <span class="n">match</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">template_name</span>
-        <span class="p">}</span>
-
-        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">templates</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">match</span><span class="p">)</span>
-        <span class="n">templates</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">cursor</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s1">&#39;insert_ts&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-
-        <span class="k">if</span> <span class="n">templates</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">restore_dots</span><span class="p">(</span><span class="n">templates</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
-
-<div class="viewcode-block" id="MongoDB.insert_template"><a class="viewcode-back" href="../../api/greenguard.db.html#greenguard.db.MongoDB.insert_template">[docs]</a>    <span class="k">def</span> <span class="nf">insert_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="p">):</span>
-        <span class="k">if</span> <span class="s1">&#39;name&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">template</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Templates need to have a name key&quot;</span><span class="p">)</span>
-
-        <span class="n">template</span><span class="p">[</span><span class="s1">&#39;insert_ts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
-        <span class="n">template</span> <span class="o">=</span> <span class="n">remove_dots</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">templates</span><span class="o">.</span><span class="n">insert_one</span><span class="p">(</span><span class="n">template</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="MongoDB.insert_pipeline"><a class="viewcode-back" href="../../api/greenguard.db.html#greenguard.db.MongoDB.insert_pipeline">[docs]</a>    <span class="k">def</span> <span class="nf">insert_pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidate</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
-
-        <span class="n">pipeline</span> <span class="o">=</span> <span class="n">candidate</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-
-        <span class="n">pipeline</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">score</span>
-        <span class="n">pipeline</span><span class="p">[</span><span class="s1">&#39;dataset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataset</span>
-        <span class="n">pipeline</span><span class="p">[</span><span class="s1">&#39;table&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span>
-        <span class="n">pipeline</span><span class="p">[</span><span class="s1">&#39;column&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">column</span>
-        <span class="n">pipeline</span><span class="p">[</span><span class="s1">&#39;insert_ts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
-
-        <span class="n">pipeline</span> <span class="o">=</span> <span class="n">remove_dots</span><span class="p">(</span><span class="n">pipeline</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">pipelines</span><span class="o">.</span><span class="n">insert_one</span><span class="p">(</span><span class="n">pipeline</span><span class="p">)</span></div></div>
+<span class="n">METRICS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;accuracy&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">accuracy_score</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+    <span class="s1">&#39;f1&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">f1_score</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+    <span class="s1">&#39;f1_macro&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">f1_macro</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+    <span class="s1">&#39;r2&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">r2_score</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+    <span class="s1">&#39;mse&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">mean_squared_error</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+    <span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">mean_absolute_error</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="p">}</span>
 </pre></div>
 
            </div>

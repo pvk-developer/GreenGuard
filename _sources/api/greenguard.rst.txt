@@ -1,17 +1,30 @@
 greenguard package
 ==================
 
-.. automodule:: greenguard
-   :members:
-   :undoc-members:
-   :show-inheritance:
+Subpackages
+-----------
+
+.. toctree::
+
+   greenguard.loaders
 
 Submodules
 ----------
 
 .. toctree::
 
+   greenguard.benchmark
    greenguard.db
-   greenguard.loader
+   greenguard.demo
+   greenguard.metrics
    greenguard.pipeline
+   greenguard.targets
    greenguard.utils
+
+Module contents
+---------------
+
+.. automodule:: greenguard
+   :members:
+   :undoc-members:
+   :show-inheritance:

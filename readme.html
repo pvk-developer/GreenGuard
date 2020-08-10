@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>GreenGuard &mdash; GreenGuard 0.1.1-dev documentation</title>
+  <title>GreenGuard &mdash; GreenGuard 0.2.3.dev0 documentation</title>
   
 
   
@@ -23,10 +23,11 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -37,7 +38,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="greenguard package" href="api/greenguard.html" />
+    <link rel="next" title="Extract Readings" href="tutorials/02_Extract_Readings.html" />
     <link rel="prev" title="GreenGuard" href="index.html" /> 
 </head>
 
@@ -85,76 +86,103 @@
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">GreenGuard</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#data-format">Data Format</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#demo-dataset">Demo Dataset</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="#concepts">Concepts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#primitive">Primitive</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#template">Template</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pipeline">Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tuning">Tuning</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="#current-tasks-and-pipelines">Current tasks and pipelines</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#greenguardpipeline">GreenGuardPipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#greenguardloader">GreenGuardLoader</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="#install">Install</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#python">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#download-and-install">Download and Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#docker-usage">Docker usage</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#data-format">Data Format</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#target-times">Target Times</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#readings">Readings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#turbines">Turbines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#csv-format">CSV Format</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#quickstart">Quickstart</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#load-and-explore-the-data">1. Load and explore the data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#split-the-data">2. Split the data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#finding-the-best-pipeline">3. Finding the best Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#fitting-the-pipeline">4. Fitting the pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#use-the-fitted-pipeline">5. Use the fitted pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#save-and-load-the-pipeline">6. Save and load the pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#load-and-split-the-demo-data">1. Load and split the demo data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exploring-the-available-pipelines">2. Exploring the available Pipelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fitting-the-pipeline">3. Fitting the Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#make-predictions">4. Make predictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#evaluate-the-goodness-of-fit">5. Evaluate the goodness-of-fit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-s-next">What’s next?</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#use-your-own-dataset">Use your own Dataset</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#prepare-the-data">1. Prepare the data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#create-a-greenguardloader">2. Create a GreenGuardLoader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#call-the-loader-load-method">3. Call the loader.load method.</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/02_Extract_Readings.html">Extract Readings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/02_Extract_Readings.html#0.-Setup-the-logging">0. Setup the logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/02_Extract_Readings.html#1.-Generate-Raw-Readings">1. Generate Raw Readings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/02_Extract_Readings.html#Readings-Format">Readings Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/02_Extract_Readings.html#Target-Times">Target Times</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#docker-usage">Docker Usage</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#docker-requirements">Docker Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#building-the-greenguard-docker-image">Building the GreenGuard Docker Image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#distributing-the-greenguard-docker-image">Distributing the GreenGuard Docker Image</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#distributing-using-a-docker-registry">Distributing using a Docker registry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#distributing-as-a-file">Distributing as a file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/02_Extract_Readings.html#2.-CSVLoader">2. CSVLoader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/02_Extract_Readings.html#3.-Preprocessing-the-data">3. Preprocessing the data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/02_Extract_Readings.html#4.-Unstacking">4. Unstacking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/02_Extract_Readings.html#5.-Saving-the-readings">5. Saving the readings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/02_Extract_Readings.html#Using-CSV">Using CSV</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#running-the-greenguard-jupyter-image">Running the greenguard-jupyter image</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#running-greenguard-jupyter-with-the-code">Running greenguard-jupyter with the code</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#running-greenguard-jupyter-without-the-greenguard-code">Running greenguard-jupyter without the greenguard code</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/02_Extract_Readings.html#Using-Pickle">Using Pickle</a></li>
 </ul>
 </li>
 </ul>
 <p class="caption"><span class="caption-text">Advanced Usage</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="advanced_usage/concepts.html">Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced_usage/concepts.html#primitive">Primitive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_usage/concepts.html#template">Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_usage/concepts.html#pipeline">Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_usage/concepts.html#tuning">Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_usage/concepts.html#greenguardpipeline">GreenGuardPipeline</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_usage/csv.html">CSV Format</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced_usage/csv.html#raw-data-format">Raw Data Format</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_usage/docker.html">Docker Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced_usage/docker.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_usage/docker.html#building-the-greenguard-docker-image">Building the GreenGuard Docker Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_usage/docker.html#distributing-the-greenguard-docker-image">Distributing the GreenGuard Docker Image</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_usage/docker.html#distributing-using-a-docker-registry">Distributing using a Docker registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_usage/docker.html#distributing-as-a-file">Distributing as a file</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_usage/docker.html#running-the-greenguard-jupyter-image">Running the greenguard-jupyter image</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_usage/docker.html#running-greenguard-jupyter-with-the-code">Running greenguard-jupyter with the code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_usage/docker.html#running-greenguard-jupyter-without-the-greenguard-code">Running greenguard-jupyter without the greenguard code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="api/greenguard.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/greenguard.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/greenguard.loaders.html">greenguard.loaders package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/greenguard.loaders.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/greenguard.loaders.html#module-greenguard.loaders">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="api/greenguard.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/greenguard.benchmark.html">greenguard.benchmark module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/greenguard.db.html">greenguard.db module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/greenguard.loader.html">greenguard.loader module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/greenguard.demo.html">greenguard.demo module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/greenguard.metrics.html">greenguard.metrics module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/greenguard.pipeline.html">greenguard.pipeline module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/greenguard.targets.html">greenguard.targets module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/greenguard.utils.html">greenguard.utils module</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="api/greenguard.html#module-greenguard">Module contents</a></li>
 </ul>
 </li>
-</ul>
-<p class="caption"><span class="caption-text">Development Notes</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="contributing.html#types-of-contributions">Types of Contributions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="contributing.html#report-bugs">Report Bugs</a></li>
@@ -168,12 +196,27 @@
 <li class="toctree-l2"><a class="reference internal" href="contributing.html#pull-request-guidelines">Pull Request Guidelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="contributing.html#unit-testing-guidelines">Unit Testing Guidelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="contributing.html#tips">Tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributing.html#release-workflow">Release Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#release-workflow">Release Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#release-candidates">Release Candidates</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="history.html">History</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="history.html#id1">0.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="history.html#id1">0.2.2 - 2020-07-10</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="history.html#internal-imrpovements">Internal Imrpovements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="history.html#resolved-issues">Resolved Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="history.html#id2">0.2.1 - 2020-06-16</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="history.html#internal-improvements">Internal Improvements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="history.html#bug-fixes">Bug Fixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="history.html#id3">Resolved Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="history.html#id4">0.2.0 - 2020-02-14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="history.html#id5">0.1.0</a></li>
 </ul>
 </li>
 </ul>
@@ -242,29 +285,55 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <p align="center">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<p align="left">
 <img width=15% src="https://dai.lids.mit.edu/wp-content/uploads/2018/06/Logo_DAI_highres.png" alt="DAI" />
-</p><p align="center">
-<i>A project from Data to AI Lab at MIT.</i>
-</p><p align="center">
-<i> ------------------------------------</i>
-</p><p align="center">
+<i>An open source project from Data to AI Lab at MIT.</i>
+</p><p align="left">
 <img width=20% src="https://dai.lids.mit.edu/wp-content/uploads/2019/03/GreenGuard.png" alt="GreenGuard" />
-</p><p align="center">
-<i>GreenGuard is a machine learning library built for data generated by wind turbines and solar panel installations.</i>
+</p><p align="left">
+AutoML for Renewable Energy Industries.
 </p><a class="reference external image-reference" href="https://pypi.python.org/pypi/greenguard"><img alt="PyPI Shield" src="https://img.shields.io/pypi/v/greenguard.svg" /></a>
-<a class="reference external image-reference" href="https://travis-ci.org/D3-AI/GreenGuard"><img alt="Travis CI Shield" src="https://travis-ci.org/D3-AI/GreenGuard.svg?branch=master" /></a>
+<a class="reference external image-reference" href="https://travis-ci.org/signals-dev/GreenGuard"><img alt="Travis CI Shield" src="https://travis-ci.org/signals-dev/GreenGuard.svg?branch=master" /></a>
+<a class="reference external image-reference" href="https://pepy.tech/project/greenguard"><img alt="Downloads" src="https://pepy.tech/badge/greenguard" /></a>
+<p><span class="raw-html-m2r"><!--
+[![Coverage Status](https://codecov.io/gh/signals-dev/GreenGuard/branch/master/graph/badge.svg)](https://codecov.io/gh/signals-dev/GreenGuard)
+--></span></p>
 <div class="section" id="greenguard">
 <h1>GreenGuard<a class="headerlink" href="#greenguard" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><p>Documentation: <a class="reference external" href="https://D3-AI.github.io/GreenGuard">https://D3-AI.github.io/GreenGuard</a></p></li>
-<li><p>Homepage: <a class="reference external" href="https://github.com/D3-AI/GreenGuard">https://github.com/D3-AI/GreenGuard</a></p></li>
+<li><p>License: <a class="reference external" href="https://github.com/signals-dev/GreenGuard/blob/master/LICENSE">MIT</a></p></li>
+<li><p>Documentation: <a class="reference external" href="https://signals-dev.github.io/GreenGuard">https://signals-dev.github.io/GreenGuard</a></p></li>
+<li><p>Homepage: <a class="reference external" href="https://github.com/signals-dev/GreenGuard">https://github.com/signals-dev/GreenGuard</a></p></li>
 </ul>
 </div>
 <div class="section" id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
-<p>The GreenGuard project is a collection of end-to-end solutions for machine learning problems commonly
-found in monitoring wind energy production systems. Most tasks utilize sensor data
+<p>The GreenGuard project is a collection of end-to-end solutions for machine learning problems
+commonly found in monitoring wind energy production systems. Most tasks utilize sensor data
 emanating from monitoring systems. We utilize the foundational innovations developed for
 automation of machine Learning at Data to AI Lab at MIT.</p>
 <p>The salient aspects of this customized project are:</p>
@@ -279,453 +348,350 @@ vetted through testing across multiple publicly available datasets for the same 
 <li><p>A <code class="docutils literal notranslate"><span class="pre">learning</span> <span class="pre">database</span></code> recording all past outcomes –&gt; tasks, pipelines, outcomes.</p></li>
 </ul>
 </div>
-<div class="section" id="data-format">
-<h1>Data Format<a class="headerlink" href="#data-format" title="Permalink to this headline">¶</a></h1>
-<p><strong>GreenGuard Pipelines</strong> work on time Series formatted as follows:</p>
-<ul class="simple">
-<li><p>A <strong>Turbines</strong> table that contains:</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">turbine_id</span></code>: column with the unique id of each turbine.</p></li>
-<li><p>A number of additional columns with information about each turbine.</p></li>
-</ul>
-</li>
-<li><p>A <strong>Signals</strong> table that contains:</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">signal_id</span></code>: column with the unique id of each signal.</p></li>
-<li><p>A number of additional columns with information about each signal.</p></li>
-</ul>
-</li>
-<li><p>A <strong>Readings</strong> table that contains:</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">reading_id</span></code>: Unique identifier of this reading.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">turbine_id</span></code>: Unique identifier of the turbine which this reading comes from.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">signal_id</span></code>: Unique identifier of the signal which this reading comes from.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">timestamp</span></code>: Time where the reading took place, as an ISO formatted datetime.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: Numeric value of this reading.</p></li>
-</ul>
-</li>
-<li><p>A <strong>Targets</strong> table that contains:</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">target_id</span></code>: Unique identifier of the turbine which this label corresponds to.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">turbine_id</span></code>: Unique identifier of the turbine which this label corresponds to.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">timestamp</span></code>: Time associated with this target</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">target</span></code>: The value that we want to predict. This can either be a numerical value or a
-categorical label. This column can also be skipped when preparing data that will be used
-only to make predictions and not to fit any pipeline.</p></li>
-</ul>
-</li>
-</ul>
-<div class="section" id="demo-dataset">
-<h2>Demo Dataset<a class="headerlink" href="#demo-dataset" title="Permalink to this headline">¶</a></h2>
-<p>For development and demonstration purposes, we include a dataset with data from several telemetry
-signals associated with one wind energy production turbine.</p>
-<p>This data, which has been already formatted as expected by the GreenGuard Pipelines, can be
-browsed and downloaded directly from the
-<a class="reference external" href="https://d3-ai-greenguard.s3.amazonaws.com/index.html">d3-ai-greenguard AWS S3 Bucket</a>.</p>
-<p>This dataset is adapted from the one used in the project by Cohen, Elliot J.,
-“Wind Analysis.” Joint Initiative of the ECOWAS Centre for Renewable Energy and Energy Efficiency (ECREEE), The United Nations Industrial Development Organization (UNIDO) and the Sustainable Engineering Lab (SEL). Columbia University, 22 Aug. 2014.
-<a class="reference external" href="https://github.com/Ecohen4/ECREEE">Available online here</a></p>
-<p>The complete list of manipulations performed on the original dataset to convert it into the
-demo one that we are using here is exhaustively shown and explained in the
-<a class="reference external" href="notebooks/Green%20Guard%20Demo%20Data.ipynb">Green Guard Demo Data notebook</a>.</p>
-</div>
-</div>
-<div class="section" id="concepts">
-<h1>Concepts<a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h1>
-<p>Before diving into the software usage, we briefly explain some concepts and terminology.</p>
-<div class="section" id="primitive">
-<h2>Primitive<a class="headerlink" href="#primitive" title="Permalink to this headline">¶</a></h2>
-<p>We call the smallest computational blocks used in a Machine Learning process
-<strong>primitives</strong>, which:</p>
-<ul class="simple">
-<li><p>Can be either classes or functions.</p></li>
-<li><p>Have some initialization arguments, which MLBlocks calls <code class="docutils literal notranslate"><span class="pre">init_params</span></code>.</p></li>
-<li><p>Have some tunable hyperparameters, which have types and a list or range of valid values.</p></li>
-</ul>
-</div>
-<div class="section" id="template">
-<h2>Template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h2>
-<p>Primitives can be combined to form what we call <strong>Templates</strong>, which:</p>
-<ul class="simple">
-<li><p>Have a list of primitives.</p></li>
-<li><p>Have some initialization arguments, which correspond to the initialization arguments
-of their primitives.</p></li>
-<li><p>Have some tunable hyperparameters, which correspond to the tunable hyperparameters
-of their primitives.</p></li>
-</ul>
-</div>
-<div class="section" id="pipeline">
-<h2>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline">¶</a></h2>
-<p>Templates can be used to build <strong>Pipelines</strong> by taking and fixing a set of valid
-hyperparameters for a Template. Hence, Pipelines:</p>
-<ul class="simple">
-<li><p>Have a list of primitives, which corresponds to the list of primitives of their template.</p></li>
-<li><p>Have some initialization arguments, which correspond to the initialization arguments
-of their template.</p></li>
-<li><p>Have some hyperparameter values, which fall within the ranges of valid tunable
-hyperparameters of their template.</p></li>
-</ul>
-<p>A pipeline can be fitted and evaluated using the MLPipeline API in MLBlocks.</p>
-</div>
-<div class="section" id="tuning">
-<h2>Tuning<a class="headerlink" href="#tuning" title="Permalink to this headline">¶</a></h2>
-<p>We call tuning the process of, given a dataset and a template, find the pipeline derived from the
-given template that gets the best possible score on the given dataset.</p>
-<p>This process usually involves fitting and evaluating multiple pipelines with different hyperparameter
-values on the same data while using optimization algorithms to deduce which hyperparameters are more
-likely to get the best results in the next iterations.</p>
-<p>We call each one of these tries a <strong>tuning iteration</strong>.</p>
-</div>
-</div>
-<div class="section" id="current-tasks-and-pipelines">
-<h1>Current tasks and pipelines<a class="headerlink" href="#current-tasks-and-pipelines" title="Permalink to this headline">¶</a></h1>
-<p>In our current phase, we are addressing two tasks - time series classification and time series
-regression. To provide solutions for these two tasks we have two components.</p>
-<div class="section" id="greenguardpipeline">
-<h2>GreenGuardPipeline<a class="headerlink" href="#greenguardpipeline" title="Permalink to this headline">¶</a></h2>
-<p>This class is the one in charge of learning from the data and making predictions by building
-<a class="reference external" href="https://hdi-project.github.io/MLBlocks">MLBlocks</a> pipelines and later on tuning them using
-<a class="reference external" href="https://hdi-project.github.io/BTB/">BTB</a></p>
-</div>
-<div class="section" id="greenguardloader">
-<h2>GreenGuardLoader<a class="headerlink" href="#greenguardloader" title="Permalink to this headline">¶</a></h2>
-<p>A class responsible for loading the time series data from CSV files, and return it in the
-format ready to be used by the <strong>GreenGuardPipeline</strong>.</p>
-</div>
-</div>
 <div class="section" id="install">
 <h1>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="python">
-<h3>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
-<p><strong>GreenGuard</strong> has been developed and runs on Python 3.5, 3.6 and 3.7.</p>
-<p>Also, although it is not strictly required, the usage of a <a class="reference external" href="https://virtualenv.pypa.io/en/latest/">virtualenv</a>
-is highly recommended in order to avoid interfering with other software installed in the system
-where you are trying to run <strong>GreenGuard</strong>.</p>
+<p><strong>GreenGuard</strong> has been developed and runs on Python 3.6 and 3.7.</p>
+<p>Also, although it is not strictly required, the usage of a <a class="reference external" href="https://virtualenv.pypa.io/en/latest/">virtualenv</a> is highly recommended in order to avoid interfering
+with other software installed in the system where you are trying to run <strong>GreenGuard</strong>.</p>
 </div>
-</div>
-<div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>The simplest and recommended way to install <strong>GreenGuard</strong> is using pip:</p>
+<div class="section" id="download-and-install">
+<h2>Download and Install<a class="headerlink" href="#download-and-install" title="Permalink to this headline">¶</a></h2>
+<p><strong>GreenGuard</strong> can be installed locally using <a class="reference external" href="https://pip.pypa.io/en/stable/">pip</a> with
+the following command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install greenguard
 </pre></div>
 </div>
-<p>For development, you can also clone the repository and install it from sources</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone git@github.com:D3-AI/GreenGuard.git
-<span class="nb">cd</span> GreenGuard
-make install-develop
-</pre></div>
+<p>This will pull and install the latest stable release from <a class="reference external" href="https://pypi.org/">PyPi</a>.</p>
+<p>If you want to install from source or contribute to the project please read the
+<a class="reference external" href="https://signals-dev.github.io/GreenGuard/contributing.html#get-started">Contributing Guide</a>.</p>
 </div>
+<div class="section" id="docker-usage">
+<h2>Docker usage<a class="headerlink" href="#docker-usage" title="Permalink to this headline">¶</a></h2>
+<p><strong>GreenGuard</strong> is prepared to be run inside a docker environment. Please check the
+<a class="reference external" href="docker/README.md">docker documentation</a> for details about how to run <strong>GreenGuard</strong> using docker.</p>
+</div>
+</div>
+<div class="section" id="data-format">
+<h1>Data Format<a class="headerlink" href="#data-format" title="Permalink to this headline">¶</a></h1>
+<p>The minimum input expected by the <strong>GreenGuard</strong> system consists of the following two elements,
+which need to be passed as <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> objects:</p>
+<div class="section" id="target-times">
+<h2>Target Times<a class="headerlink" href="#target-times" title="Permalink to this headline">¶</a></h2>
+<p>A table containing the specification of the problem that we are solving, which has three
+columns:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">turbine_id</span></code>: Unique identifier of the turbine which this label corresponds to.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cutoff_time</span></code>: Time associated with this target</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target</span></code>: The value that we want to predict. This can either be a numerical value or a
+categorical label. This column can also be skipped when preparing data that will be used
+only to make predictions and not to fit any pipeline.</p></li>
+</ul>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>turbine_id</p></th>
+<th class="head"><p>cutoff_time</p></th>
+<th class="head"><p>target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>T1</p></td>
+<td><p>2001-01-02 00:00:00</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>T1</p></td>
+<td><p>2001-01-03 00:00:00</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>T2</p></td>
+<td><p>2001-01-04 00:00:00</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="readings">
+<h2>Readings<a class="headerlink" href="#readings" title="Permalink to this headline">¶</a></h2>
+<p>A table containing the signal data from the different sensors, with the following columns:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">turbine_id</span></code>: Unique identifier of the turbine which this reading comes from.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">signal_id</span></code>: Unique identifier of the signal which this reading comes from.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">timestamp</span> <span class="pre">(datetime)</span></code>: Time where the reading took place, as a datetime.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span> <span class="pre">(float)</span></code>: Numeric value of this reading.</p></li>
+</ul>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>turbine_id</p></th>
+<th class="head"><p>signal_id</p></th>
+<th class="head"><p>timestamp</p></th>
+<th class="head"><p>value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>T1</p></td>
+<td><p>S1</p></td>
+<td><p>2001-01-01 00:00:00</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>T1</p></td>
+<td><p>S1</p></td>
+<td><p>2001-01-01 12:00:00</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>T1</p></td>
+<td><p>S1</p></td>
+<td><p>2001-01-02 00:00:00</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>T1</p></td>
+<td><p>S1</p></td>
+<td><p>2001-01-02 12:00:00</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>T1</p></td>
+<td><p>S1</p></td>
+<td><p>2001-01-03 00:00:00</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>T1</p></td>
+<td><p>S1</p></td>
+<td><p>2001-01-03 12:00:00</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>T1</p></td>
+<td><p>S2</p></td>
+<td><p>2001-01-01 00:00:00</p></td>
+<td><p>7</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>T1</p></td>
+<td><p>S2</p></td>
+<td><p>2001-01-01 12:00:00</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>T1</p></td>
+<td><p>S2</p></td>
+<td><p>2001-01-02 00:00:00</p></td>
+<td><p>9</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>T1</p></td>
+<td><p>S2</p></td>
+<td><p>2001-01-02 12:00:00</p></td>
+<td><p>10</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>T1</p></td>
+<td><p>S2</p></td>
+<td><p>2001-01-03 00:00:00</p></td>
+<td><p>11</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>T1</p></td>
+<td><p>S2</p></td>
+<td><p>2001-01-03 12:00:00</p></td>
+<td><p>12</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="turbines">
+<h2>Turbines<a class="headerlink" href="#turbines" title="Permalink to this headline">¶</a></h2>
+<p>Optionally, a third table can be added containing metadata about the turbines.
+The only requirement for this table is to have a <code class="docutils literal notranslate"><span class="pre">turbine_id</span></code> field, and it can have
+an arbitraty number of additional fields.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>turbine_id</p></th>
+<th class="head"><p>manufacturer</p></th>
+<th class="head"><p>…</p></th>
+<th class="head"><p>…</p></th>
+<th class="head"><p>…</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>T1</p></td>
+<td><p>Siemens</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>T2</p></td>
+<td><p>Siemens</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="csv-format">
+<h2>CSV Format<a class="headerlink" href="#csv-format" title="Permalink to this headline">¶</a></h2>
+<p>A part from the in-memory data format explained above, which is limited by the memory
+allocation capabilities of the system where it is run, <strong>GreenGuard</strong> is also prepared to
+load and work with data stored as a collection of CSV files, drastically increasing the amount
+of data which it can work with. Further details about this format can be found in the
+<a class="reference external" href="https://signals-dev.github.io/GreenGuard/advanced_usage/csv.html">project documentation site</a>.</p>
 </div>
 </div>
 <div class="section" id="quickstart">
 <h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h1>
-<p>In this example we will load some demo data using the <strong>GreenGuardLoader</strong> and fetch it to the
-<strong>GreenGuardPipeline</strong> for it to find the best possible pipeline, fit it using the given data
-and then make predictions from it.</p>
-<div class="section" id="load-and-explore-the-data">
-<h2>1. Load and explore the data<a class="headerlink" href="#load-and-explore-the-data" title="Permalink to this headline">¶</a></h2>
+<p>In this example we will load some demo data and classify it using a <strong>GreenGuard Pipeline</strong>.</p>
+<div class="section" id="load-and-split-the-demo-data">
+<h2>1. Load and split the demo data<a class="headerlink" href="#load-and-split-the-demo-data" title="Permalink to this headline">¶</a></h2>
 <p>The first step is to load the demo data.</p>
-<p>For this, we will import and call the <code class="docutils literal notranslate"><span class="pre">greenguard.loader.load_demo</span></code> function without any arguments:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">greenguard.loader</span> <span class="kn">import</span> <span class="n">load_demo</span>
+<p>For this, we will import and call the <code class="docutils literal notranslate"><span class="pre">greenguard.demo.load_demo</span></code> function without any arguments:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">greenguard.demo</span> <span class="kn">import</span> <span class="n">load_demo</span>
 
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">tables</span> <span class="o">=</span> <span class="n">load_demo</span><span class="p">()</span>
+<span class="n">target_times</span><span class="p">,</span> <span class="n">readings</span> <span class="o">=</span> <span class="n">load_demo</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>The returned objects are:</p>
-<p><code class="docutils literal notranslate"><span class="pre">X</span></code>: A <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> with the <code class="docutils literal notranslate"><span class="pre">targets</span></code> table data without the <code class="docutils literal notranslate"><span class="pre">target</span></code> column.</p>
-<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>   <span class="n">target_id</span>  <span class="n">turbine_id</span>  <span class="k">timestamp</span>
-<span class="mi">0</span>          <span class="mi">1</span>           <span class="mi">1</span> <span class="mi">2013</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span>
-<span class="mi">1</span>          <span class="mi">2</span>           <span class="mi">1</span> <span class="mi">2013</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">02</span>
-<span class="mi">2</span>          <span class="mi">3</span>           <span class="mi">1</span> <span class="mi">2013</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">03</span>
-<span class="mi">3</span>          <span class="mi">4</span>           <span class="mi">1</span> <span class="mi">2013</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">04</span>
-<span class="mi">4</span>          <span class="mi">5</span>           <span class="mi">1</span> <span class="mi">2013</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">05</span>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_times</span></code>: A <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> with the <code class="docutils literal notranslate"><span class="pre">target_times</span></code> table data:</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>  turbine_id cutoff_time  target
+0       T001  2013-01-12       0
+1       T001  2013-01-13       0
+2       T001  2013-01-14       0
+3       T001  2013-01-15       1
+4       T001  2013-01-16       0
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">y</span></code>: A <code class="docutils literal notranslate"><span class="pre">pandas.Series</span></code> with the <code class="docutils literal notranslate"><span class="pre">target</span></code> column from the <code class="docutils literal notranslate"><span class="pre">targets</span></code> table.</p>
-<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span>    <span class="mi">0</span><span class="p">.</span><span class="mi">0</span>
-<span class="mi">1</span>    <span class="mi">0</span><span class="p">.</span><span class="mi">0</span>
-<span class="mi">2</span>    <span class="mi">0</span><span class="p">.</span><span class="mi">0</span>
-<span class="mi">3</span>    <span class="mi">0</span><span class="p">.</span><span class="mi">0</span>
-<span class="mi">4</span>    <span class="mi">0</span><span class="p">.</span><span class="mi">0</span>
-<span class="n">Name</span><span class="p">:</span> <span class="n">target</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">readings</span></code>: A <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> containing the time series data in the format explained above.</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>  turbine_id signal_id  timestamp  value
+0       T001       S01 2013-01-10  323.0
+1       T001       S02 2013-01-10  320.0
+2       T001       S03 2013-01-10  284.0
+3       T001       S04 2013-01-10  348.0
+4       T001       S05 2013-01-10  273.0
 </pre></div>
 </div>
-<p><cite>tables</cite>: A dictionary containing three tables in the format explained above:</p>
-<p>the <code class="docutils literal notranslate"><span class="pre">turbines</span></code> table:</p>
-<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>   <span class="n">turbine_id</span>       <span class="n">name</span>
-<span class="mi">0</span>           <span class="mi">1</span>  <span class="n">Turbine</span> <span class="mi">1</span>
-</pre></div>
-</div>
-<p>the <code class="docutils literal notranslate"><span class="pre">signals</span></code> table:</p>
-<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>   <span class="n">signal_id</span>                                          <span class="n">name</span>
-<span class="mi">0</span>          <span class="mi">1</span>  <span class="n">WTG01_Grid</span> <span class="n">Production</span> <span class="n">PossiblePower</span> <span class="k">Avg</span><span class="p">.</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="mi">1</span>          <span class="mi">2</span>  <span class="n">WTG02_Grid</span> <span class="n">Production</span> <span class="n">PossiblePower</span> <span class="k">Avg</span><span class="p">.</span> <span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="mi">2</span>          <span class="mi">3</span>  <span class="n">WTG03_Grid</span> <span class="n">Production</span> <span class="n">PossiblePower</span> <span class="k">Avg</span><span class="p">.</span> <span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="mi">3</span>          <span class="mi">4</span>  <span class="n">WTG04_Grid</span> <span class="n">Production</span> <span class="n">PossiblePower</span> <span class="k">Avg</span><span class="p">.</span> <span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="mi">4</span>          <span class="mi">5</span>  <span class="n">WTG05_Grid</span> <span class="n">Production</span> <span class="n">PossiblePower</span> <span class="k">Avg</span><span class="p">.</span> <span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>and the <code class="docutils literal notranslate"><span class="pre">readings</span></code> table:</p>
-<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>   <span class="n">reading_id</span>  <span class="n">turbine_id</span>  <span class="n">signal_id</span>  <span class="k">timestamp</span>  <span class="n">value</span>
-<span class="mi">0</span>           <span class="mi">1</span>           <span class="mi">1</span>          <span class="mi">1</span> <span class="mi">2013</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span>  <span class="mi">817</span><span class="p">.</span><span class="mi">0</span>
-<span class="mi">1</span>           <span class="mi">2</span>           <span class="mi">1</span>          <span class="mi">2</span> <span class="mi">2013</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span>  <span class="mi">805</span><span class="p">.</span><span class="mi">0</span>
-<span class="mi">2</span>           <span class="mi">3</span>           <span class="mi">1</span>          <span class="mi">3</span> <span class="mi">2013</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span>  <span class="mi">786</span><span class="p">.</span><span class="mi">0</span>
-<span class="mi">3</span>           <span class="mi">4</span>           <span class="mi">1</span>          <span class="mi">4</span> <span class="mi">2013</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span>  <span class="mi">809</span><span class="p">.</span><span class="mi">0</span>
-<span class="mi">4</span>           <span class="mi">5</span>           <span class="mi">1</span>          <span class="mi">5</span> <span class="mi">2013</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span>  <span class="mi">755</span><span class="p">.</span><span class="mi">0</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="split-the-data">
-<h2>2. Split the data<a class="headerlink" href="#split-the-data" title="Permalink to this headline">¶</a></h2>
-<p>If we want to split the data in train and test subsets, we can do so by splitting the
-<code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> variables with any suitable tool.</p>
-<p>In this case, we will do it using the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html">train_test_split function from scikit-learn</a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="finding-the-best-pipeline">
-<h2>3. Finding the best Pipeline<a class="headerlink" href="#finding-the-best-pipeline" title="Permalink to this headline">¶</a></h2>
-<p>Once we have loaded the data, we create a <strong>GreenGuardPipeline</strong> instance by passing:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">template</span> <span class="pre">(string)</span></code>: the name of a template or the path to a template json file.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">metric</span> <span class="pre">(string</span> <span class="pre">or</span> <span class="pre">function)</span></code>: The name of the metric to use or a metric function to use.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">cost</span> <span class="pre">(bool)</span></code>: Whether the metric is a cost function to be minimized or a score to be maximized.</p></li>
+</li>
 </ul>
-<p>Optionally, we can also pass defails about the cross validation configuration:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">stratify</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">cv_splits</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">shuffle</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">random_state</span></code></p></li>
-</ul>
-<p>In this case, we will be loading the <code class="docutils literal notranslate"><span class="pre">greenguard_classification</span></code> pipeline, using
-the <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> metric, and using only 2 cross validation splits:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">greenguard.pipeline</span> <span class="kn">import</span> <span class="n">GreenGuardPipeline</span>
+<p>Once we have loaded the <code class="docutils literal notranslate"><span class="pre">target_times</span></code> and before proceeding to training any Machine Learning
+Pipeline, we will have split them in 2 partitions for training and testing.</p>
+<p>In this case, we will split them using the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html">train_test_split function from scikit-learn</a>,
+but it can be done with any other suitable tool.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 
-<span class="n">pipeline</span> <span class="o">=</span> <span class="n">GreenGuardPipeline</span><span class="p">(</span><span class="n">template</span><span class="o">=</span><span class="s1">&#39;greenguard_classification&#39;</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">cv_splits</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">target_times</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Once we have created the pipeline, we can call its <code class="docutils literal notranslate"><span class="pre">tune</span></code> method to find the best possible
-hyperparameters for our data, passing the <code class="docutils literal notranslate"><span class="pre">X</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">tables</span></code> variables returned by the loader,
-as well as an indication of the number of tuning iterations that we want to perform.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span><span class="o">.</span><span class="n">tune</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">tables</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<p>Notice how we are only splitting the <code class="docutils literal notranslate"><span class="pre">target_times</span></code> data and not the <code class="docutils literal notranslate"><span class="pre">readings</span></code>.
+This is because the pipelines will later on take care of selecting the parts of the
+<code class="docutils literal notranslate"><span class="pre">readings</span></code> table needed for the training based on the information found inside
+the <code class="docutils literal notranslate"><span class="pre">train</span></code> and <code class="docutils literal notranslate"><span class="pre">test</span></code> inputs.</p>
+<p>Additionally, if we want to calculate a goodness-of-fit score later on, we can separate the
+testing target values from the <code class="docutils literal notranslate"><span class="pre">test</span></code> table by popping them from it:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_targets</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>After the tuning process has finished, the hyperparameters have been already set in the classifier.</p>
-<p>We can see the found hyperparameters by calling the <code class="docutils literal notranslate"><span class="pre">get_hyperparameters</span></code> method,</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span><span class="o">.</span><span class="n">get_hyperparameters</span><span class="p">()</span>
+</div>
+<div class="section" id="exploring-the-available-pipelines">
+<h2>2. Exploring the available Pipelines<a class="headerlink" href="#exploring-the-available-pipelines" title="Permalink to this headline">¶</a></h2>
+<p>Once we have the data ready, we need to find a suitable pipeline.</p>
+<p>The list of available GreenGuard Pipelines can be obtained using the <code class="docutils literal notranslate"><span class="pre">greenguard.get_pipelines</span></code>
+function.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">greenguard</span> <span class="kn">import</span> <span class="n">get_pipelines</span>
+
+<span class="n">pipelines</span> <span class="o">=</span> <span class="n">get_pipelines</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>which will return a dictionary with the best hyperparameters found so far:</p>
-<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>{
-    &quot;pandas.DataFrame.resample#1&quot;: {
-        &quot;rule&quot;: &quot;1D&quot;,
-        &quot;time_index&quot;: &quot;timestamp&quot;,
-        &quot;groupby&quot;: [
-            &quot;turbine_id&quot;,
-            &quot;signal_id&quot;
-        ],
-        &quot;aggregation&quot;: &quot;mean&quot;
-    },
-    &quot;pandas.DataFrame.unstack#1&quot;: {
-        &quot;level&quot;: &quot;signal_id&quot;,
-        &quot;reset_index&quot;: true
-    },
-    ...
+<p>The returned <code class="docutils literal notranslate"><span class="pre">pipeline</span></code> variable will be <code class="docutils literal notranslate"><span class="pre">list</span></code> containing the names of all the pipelines
+available in the GreenGuard system:</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>[&#39;unstack_double_lstm_timeseries_classifier&#39;,
+ &#39;unstack_lstm_timeseries_classifier&#39;,
+ &#39;unstack_normalize_dfs_xgb_classifier&#39;,
+ &#39;unstack_dfs_xgb_classifier&#39;,
+ &#39;normalize_dfs_xgb_classifier&#39;]
 </pre></div>
 </div>
-<p>as well as the obtained cross validation score by looking at the <code class="docutils literal notranslate"><span class="pre">score</span></code> attribute of the
-<code class="docutils literal notranslate"><span class="pre">pipeline</span></code> object:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span><span class="o">.</span><span class="n">score</span>  <span class="c1"># -&gt; 0.6447509660798626</span>
+<p>For the rest of this tutorial, we will select and use the pipeline
+<code class="docutils literal notranslate"><span class="pre">normalize_dfs_xgb_classifier</span></code> as our template.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline_name</span> <span class="o">=</span> <span class="s1">&#39;normalize_dfs_xgb_classifier&#39;</span>
 </pre></div>
 </div>
-<p><strong>NOTE</strong>: If the score is not good enough, we can call the <code class="docutils literal notranslate"><span class="pre">tune</span></code> method again as many times
-as needed and the pipeline will continue its tuning process every time based on the previous
-results!</p>
 </div>
 <div class="section" id="fitting-the-pipeline">
-<h2>4. Fitting the pipeline<a class="headerlink" href="#fitting-the-pipeline" title="Permalink to this headline">¶</a></h2>
-<p>Once we are satisfied with the obtained cross validation score, we can proceed to call
-the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method passing again the same data elements.</p>
-<p>This will fit the pipeline with all the training data available using the best hyperparameters
-found during the tuning process:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">tables</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="use-the-fitted-pipeline">
-<h2>5. Use the fitted pipeline<a class="headerlink" href="#use-the-fitted-pipeline" title="Permalink to this headline">¶</a></h2>
-<p>After fitting the pipeline, we are ready to make predictions on new data:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">tables</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>And evaluate its prediction performance:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<h2>3. Fitting the Pipeline<a class="headerlink" href="#fitting-the-pipeline" title="Permalink to this headline">¶</a></h2>
+<p>Once we have loaded the data and selected the pipeline that we will use, we have to
+fit it.</p>
+<p>For this, we will create an instance of a <code class="docutils literal notranslate"><span class="pre">GreenGuardPipeline</span></code> object passing the name
+of the pipeline that we want to use:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">greenguard.pipeline</span> <span class="kn">import</span> <span class="n">GreenGuardPipeline</span>
 
-<span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span> <span class="c1"># -&gt; 0.6413043478260869</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">GreenGuardPipeline</span><span class="p">(</span><span class="n">pipeline_name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And then we can directly fit it to our data by calling its <code class="docutils literal notranslate"><span class="pre">fit</span></code> method and passing in the
+training <code class="docutils literal notranslate"><span class="pre">target_times</span></code> and the complete <code class="docutils literal notranslate"><span class="pre">readings</span></code> table:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">readings</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="save-and-load-the-pipeline">
-<h2>6. Save and load the pipeline<a class="headerlink" href="#save-and-load-the-pipeline" title="Permalink to this headline">¶</a></h2>
-<p>Since the tuning and fitting process takes time to execute and requires a lot of data, you
-will probably want to save a fitted instance and load it later to analyze new signals
-instead of fitting pipelines over and over again.</p>
-<p>This can be done by using the <code class="docutils literal notranslate"><span class="pre">save</span></code> and <code class="docutils literal notranslate"><span class="pre">load</span></code> methods from the <code class="docutils literal notranslate"><span class="pre">GreenGuardPipeline</span></code>.</p>
-<p>In order to save an instance, call its <code class="docutils literal notranslate"><span class="pre">save</span></code> method passing it the path and filename
-where the model should be saved.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;my_pipeline.pkl&#39;</span>
+<div class="section" id="make-predictions">
+<h2>4. Make predictions<a class="headerlink" href="#make-predictions" title="Permalink to this headline">¶</a></h2>
+<p>After fitting the pipeline, we are ready to make predictions on new data by calling the
+<code class="docutils literal notranslate"><span class="pre">pipeline.predict</span></code> method passing the testing <code class="docutils literal notranslate"><span class="pre">target_times</span></code> and, again, the complete
+<code class="docutils literal notranslate"><span class="pre">readings</span></code> table.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">readings</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="evaluate-the-goodness-of-fit">
+<h2>5. Evaluate the goodness-of-fit<a class="headerlink" href="#evaluate-the-goodness-of-fit" title="Permalink to this headline">¶</a></h2>
+<p>Finally, after making predictions we can evaluate how good the prediction was
+using any suitable metric.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">f1_score</span>
 
-<span class="n">pipeline</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Once the pipeline is saved, it can be loaded back as a new <code class="docutils literal notranslate"><span class="pre">GreenGuardPipeline</span></code> by using the
-<code class="docutils literal notranslate"><span class="pre">GreenGuardPipeline.load</span></code> method:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">new_pipeline</span> <span class="o">=</span> <span class="n">GreenGuardPipeline</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Once loaded, it can be directly used to make predictions on new data.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">new_pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">tables</span><span class="p">)</span>
+<span class="n">f1_score</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="use-your-own-dataset">
-<h1>Use your own Dataset<a class="headerlink" href="#use-your-own-dataset" title="Permalink to this headline">¶</a></h1>
-<p>Once you are familiar with the <strong>GreenGuardPipeline</strong> usage, you will probably want to run it
-on your own dataset.</p>
-<p>Here are the necessary steps:</p>
-<div class="section" id="prepare-the-data">
-<h2>1. Prepare the data<a class="headerlink" href="#prepare-the-data" title="Permalink to this headline">¶</a></h2>
-<p>Firt of all, you will need to prepare your data as 4 CSV files like the ones described in the
-<a class="reference external" href="#data-format">data format</a> section above.</p>
-</div>
-<div class="section" id="create-a-greenguardloader">
-<h2>2. Create a GreenGuardLoader<a class="headerlink" href="#create-a-greenguardloader" title="Permalink to this headline">¶</a></h2>
-<p>Once you have the CSV files ready, you will need to import the <code class="docutils literal notranslate"><span class="pre">greenguard.loader.GreenGuardLoader</span></code>
-class and create an instance passing:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">path</span> <span class="pre">-</span> <span class="pre">str</span></code>: The path to the folder where the 4 CSV files are</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">target</span> <span class="pre">-</span> <span class="pre">str,</span> <span class="pre">gptional</span></code>: The name of the target table. Defaults to <code class="docutils literal notranslate"><span class="pre">targets</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">target_column</span> <span class="pre">-</span> <span class="pre">str,</span> <span class="pre">optional</span></code>: The name of the target column. Defaults to <code class="docutils literal notranslate"><span class="pre">target</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">readings</span> <span class="pre">-</span> <span class="pre">str,</span> <span class="pre">optional</span></code>: The name of the readings table. Defaults to <code class="docutils literal notranslate"><span class="pre">readings</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">turbines</span> <span class="pre">-</span> <span class="pre">str,</span> <span class="pre">optional</span></code>: The name of the turbines table. Defaults to <code class="docutils literal notranslate"><span class="pre">turbines</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">signals</span> <span class="pre">-</span> <span class="pre">str,</span> <span class="pre">optional</span></code>: The name of the signals table. Defaults to <code class="docutils literal notranslate"><span class="pre">signals</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">readings</span> <span class="pre">-</span> <span class="pre">str,</span> <span class="pre">optional</span></code>: The name of the readings table. Defaults to <code class="docutils literal notranslate"><span class="pre">readings</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">gzip</span> <span class="pre">-</span> <span class="pre">bool,</span> <span class="pre">optional</span></code>: Set to True if the CSV files are gzipped. Defaults to False.</p></li>
-</ul>
-<p>For example, here we will be loading a custom dataset which has been sorted in gzip format
-inside the <code class="docutils literal notranslate"><span class="pre">my_dataset</span></code> folder, and for which the target table has a different name:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">greenguard.loader</span> <span class="kn">import</span> <span class="n">GreenGuardLoader</span>
-
-<span class="n">loader</span> <span class="o">=</span> <span class="n">GreenGuardLoader</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;my_dataset&#39;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;labels&#39;</span><span class="p">,</span> <span class="n">gzip</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="call-the-loader-load-method">
-<h2>3. Call the loader.load method.<a class="headerlink" href="#call-the-loader-load-method" title="Permalink to this headline">¶</a></h2>
-<p>Once the <code class="docutils literal notranslate"><span class="pre">loader</span></code> instance has been created, we can call its <code class="docutils literal notranslate"><span class="pre">load</span></code> method:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">tables</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Optionally, if the dataset contains only data to make predictions and the <code class="docutils literal notranslate"><span class="pre">target</span></code> column
-does not exist, we can pass it the argument <code class="docutils literal notranslate"><span class="pre">False</span></code> to skip it:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">tables</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="docker-usage">
-<h1>Docker Usage<a class="headerlink" href="#docker-usage" title="Permalink to this headline">¶</a></h1>
-<p><strong>GreenGuard</strong> comes configured and ready to be distributed and run as a docker image which starts
-a jupyter notebook already configured to use greenguard, with all the required dependencies already
-installed.</p>
-<div class="section" id="docker-requirements">
-<h2>Docker Requirements<a class="headerlink" href="#docker-requirements" title="Permalink to this headline">¶</a></h2>
-<p>The only requirement in order to run the GreenGuard Docker image is to have Docker installed and
-that the user has enough permissions to run it.</p>
-<p>Installation instructions for any possible system compatible can be found <a class="reference external" href="https://docs.docker.com/install/">here</a></p>
-<p>Additionally, the system that builds the GreenGuard Docker image will also need to have a working
-internet connection that allows downloading the base image and the additional python depenedencies.</p>
-</div>
-<div class="section" id="building-the-greenguard-docker-image">
-<h2>Building the GreenGuard Docker Image<a class="headerlink" href="#building-the-greenguard-docker-image" title="Permalink to this headline">¶</a></h2>
-<p>After having cloned the <strong>GreenGuard</strong> repository, all you have to do in order to build the GreenGuard Docker
-Image is running this command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make docker-jupyter-build
-</pre></div>
-</div>
-<p>After a few minutes, the new image, called <code class="docutils literal notranslate"><span class="pre">greenguard-jupyter</span></code>, will have been built into the system
-and will be ready to be used or distributed.</p>
-</div>
-<div class="section" id="distributing-the-greenguard-docker-image">
-<h2>Distributing the GreenGuard Docker Image<a class="headerlink" href="#distributing-the-greenguard-docker-image" title="Permalink to this headline">¶</a></h2>
-<p>Once the <code class="docutils literal notranslate"><span class="pre">greenguard-jupyter</span></code> image is built, it can be distributed in several ways.</p>
-<div class="section" id="distributing-using-a-docker-registry">
-<h3>Distributing using a Docker registry<a class="headerlink" href="#distributing-using-a-docker-registry" title="Permalink to this headline">¶</a></h3>
-<p>The simplest way to distribute the recently created image is <a class="reference external" href="https://docs.docker.com/registry/">using a registry</a>.</p>
-<p>In order to do so, we will need to have write access to a public or private registry (remember to
-<a class="reference external" href="https://docs.docker.com/engine/reference/commandline/login/">login</a>!) and execute these commands:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker tag greenguard-jupyter:latest your-registry-name:some-tag
-docker push your-registry-name:some-tag
-</pre></div>
-</div>
-<p>Afterwards, in the receiving machine:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker pull your-registry-name:some-tag
-docker tag your-registry-name:some-tag greenguard-jupyter:latest
-</pre></div>
-</div>
-</div>
-<div class="section" id="distributing-as-a-file">
-<h3>Distributing as a file<a class="headerlink" href="#distributing-as-a-file" title="Permalink to this headline">¶</a></h3>
-<p>If the distribution of the image has to be done offline for any reason, it can be achieved
-using the following command.</p>
-<p>In the system that already has the image:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker save --output greenguard-jupyter.tar greenguard-jupyter
-</pre></div>
-</div>
-<p>Then copy over the file <code class="docutils literal notranslate"><span class="pre">greenguard-jupyter.tar</span></code> to the new system and there, run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker load --input greenguard-jupyter.tar
-</pre></div>
-</div>
-<p>After these commands, the <code class="docutils literal notranslate"><span class="pre">greenguard-jupyter</span></code> image should be available and ready to be used in the
-new system.</p>
-</div>
-</div>
-<div class="section" id="running-the-greenguard-jupyter-image">
-<h2>Running the greenguard-jupyter image<a class="headerlink" href="#running-the-greenguard-jupyter-image" title="Permalink to this headline">¶</a></h2>
-<p>Once the <code class="docutils literal notranslate"><span class="pre">greenguard-jupyter</span></code> image has been built, pulled or loaded, it is ready to be run.</p>
-<p>This can be done in two ways:</p>
-<div class="section" id="running-greenguard-jupyter-with-the-code">
-<h3>Running greenguard-jupyter with the code<a class="headerlink" href="#running-greenguard-jupyter-with-the-code" title="Permalink to this headline">¶</a></h3>
-<p>If the GreenGuard source code is available in the system, running the image is as simple as running
-this command from within the root of the project:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make docker-jupyter-run
-</pre></div>
-</div>
-<p>This will start a jupyter notebook using the docker image, which you can access by pointing your
-browser at <a class="reference external" href="http://127.0.0.1:8888">http://127.0.0.1:8888</a></p>
-<p>In this case, the local version of the project will also mounted within the Docker container,
-which means that any changes that you do in your local code will immediately be available
-within your notebooks, and that any notebook that you create within jupyter will also show
-up in your <code class="docutils literal notranslate"><span class="pre">notebooks</span></code> folder!</p>
-</div>
-<div class="section" id="running-greenguard-jupyter-without-the-greenguard-code">
-<h3>Running greenguard-jupyter without the greenguard code<a class="headerlink" href="#running-greenguard-jupyter-without-the-greenguard-code" title="Permalink to this headline">¶</a></h3>
-<p>If the GreenGuard source code is not available in the system and only the Docker Image is, you can
-still run the image by using this command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run -ti -p <span class="m">8888</span>:8888 greenguard-jupyter
-</pre></div>
-</div>
-<p>In this case, the code changes and the notebooks that you create within jupyter will stay
-inside the container and you will only be able to access and download them through the
-jupyter interface.</p>
-</div>
+<div class="section" id="what-s-next">
+<h2>What’s next?<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h2>
+<p>For more details about <strong>GreenGuard</strong> and all its possibilities and features, please check the
+<a class="reference external" href="https://signals-dev.github.io/GreenGuard/">project documentation site</a>
+Also do not forget to have a look at the <a class="reference external" href="https://github.com/signals-dev/GreenGuard/tree/master/tutorials">tutorials</a>!</p>
 </div>
 </div>
 
@@ -737,7 +703,7 @@ jupyter interface.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="api/greenguard.html" class="btn btn-neutral float-right" title="greenguard package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="tutorials/02_Extract_Readings.html" class="btn btn-neutral float-right" title="Extract Readings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral float-left" title="GreenGuard" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

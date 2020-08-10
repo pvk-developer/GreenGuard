@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>History &mdash; GreenGuard 0.1.1-dev documentation</title>
+  <title>History &mdash; GreenGuard 0.2.3.dev0 documentation</title>
   
 
   
@@ -23,10 +23,11 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -84,76 +85,103 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="readme.html">GreenGuard</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readme.html#overview">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="readme.html#data-format">Data Format</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#demo-dataset">Demo Dataset</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="readme.html#concepts">Concepts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#primitive">Primitive</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#template">Template</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#pipeline">Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#tuning">Tuning</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="readme.html#current-tasks-and-pipelines">Current tasks and pipelines</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#greenguardpipeline">GreenGuardPipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#greenguardloader">GreenGuardLoader</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="readme.html#install">Install</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#requirements">Requirements</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="readme.html#python">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme.html#download-and-install">Download and Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme.html#docker-usage">Docker usage</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#data-format">Data Format</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="readme.html#target-times">Target Times</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme.html#readings">Readings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme.html#turbines">Turbines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme.html#csv-format">CSV Format</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="readme.html#quickstart">Quickstart</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#load-and-explore-the-data">1. Load and explore the data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#split-the-data">2. Split the data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#finding-the-best-pipeline">3. Finding the best Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#fitting-the-pipeline">4. Fitting the pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#use-the-fitted-pipeline">5. Use the fitted pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#save-and-load-the-pipeline">6. Save and load the pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme.html#load-and-split-the-demo-data">1. Load and split the demo data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme.html#exploring-the-available-pipelines">2. Exploring the available Pipelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme.html#fitting-the-pipeline">3. Fitting the Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme.html#make-predictions">4. Make predictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme.html#evaluate-the-goodness-of-fit">5. Evaluate the goodness-of-fit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme.html#what-s-next">What’s next?</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="readme.html#use-your-own-dataset">Use your own Dataset</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#prepare-the-data">1. Prepare the data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#create-a-greenguardloader">2. Create a GreenGuardLoader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#call-the-loader-load-method">3. Call the loader.load method.</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/02_Extract_Readings.html">Extract Readings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/02_Extract_Readings.html#0.-Setup-the-logging">0. Setup the logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/02_Extract_Readings.html#1.-Generate-Raw-Readings">1. Generate Raw Readings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/02_Extract_Readings.html#Readings-Format">Readings Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/02_Extract_Readings.html#Target-Times">Target Times</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="readme.html#docker-usage">Docker Usage</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#docker-requirements">Docker Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#building-the-greenguard-docker-image">Building the GreenGuard Docker Image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#distributing-the-greenguard-docker-image">Distributing the GreenGuard Docker Image</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="readme.html#distributing-using-a-docker-registry">Distributing using a Docker registry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="readme.html#distributing-as-a-file">Distributing as a file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/02_Extract_Readings.html#2.-CSVLoader">2. CSVLoader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/02_Extract_Readings.html#3.-Preprocessing-the-data">3. Preprocessing the data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/02_Extract_Readings.html#4.-Unstacking">4. Unstacking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/02_Extract_Readings.html#5.-Saving-the-readings">5. Saving the readings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/02_Extract_Readings.html#Using-CSV">Using CSV</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="readme.html#running-the-greenguard-jupyter-image">Running the greenguard-jupyter image</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="readme.html#running-greenguard-jupyter-with-the-code">Running greenguard-jupyter with the code</a></li>
-<li class="toctree-l3"><a class="reference internal" href="readme.html#running-greenguard-jupyter-without-the-greenguard-code">Running greenguard-jupyter without the greenguard code</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/02_Extract_Readings.html#Using-Pickle">Using Pickle</a></li>
 </ul>
 </li>
 </ul>
 <p class="caption"><span class="caption-text">Advanced Usage</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="advanced_usage/concepts.html">Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced_usage/concepts.html#primitive">Primitive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_usage/concepts.html#template">Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_usage/concepts.html#pipeline">Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_usage/concepts.html#tuning">Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_usage/concepts.html#greenguardpipeline">GreenGuardPipeline</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_usage/csv.html">CSV Format</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced_usage/csv.html#raw-data-format">Raw Data Format</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_usage/docker.html">Docker Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced_usage/docker.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_usage/docker.html#building-the-greenguard-docker-image">Building the GreenGuard Docker Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_usage/docker.html#distributing-the-greenguard-docker-image">Distributing the GreenGuard Docker Image</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_usage/docker.html#distributing-using-a-docker-registry">Distributing using a Docker registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_usage/docker.html#distributing-as-a-file">Distributing as a file</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_usage/docker.html#running-the-greenguard-jupyter-image">Running the greenguard-jupyter image</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced_usage/docker.html#running-greenguard-jupyter-with-the-code">Running greenguard-jupyter with the code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced_usage/docker.html#running-greenguard-jupyter-without-the-greenguard-code">Running greenguard-jupyter without the greenguard code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="api/greenguard.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/greenguard.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/greenguard.loaders.html">greenguard.loaders package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/greenguard.loaders.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/greenguard.loaders.html#module-greenguard.loaders">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="api/greenguard.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/greenguard.benchmark.html">greenguard.benchmark module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/greenguard.db.html">greenguard.db module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/greenguard.loader.html">greenguard.loader module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/greenguard.demo.html">greenguard.demo module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/greenguard.metrics.html">greenguard.metrics module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/greenguard.pipeline.html">greenguard.pipeline module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/greenguard.targets.html">greenguard.targets module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/greenguard.utils.html">greenguard.utils module</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="api/greenguard.html#module-greenguard">Module contents</a></li>
 </ul>
 </li>
-</ul>
-<p class="caption"><span class="caption-text">Development Notes</span></p>
-<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="contributing.html#types-of-contributions">Types of Contributions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="contributing.html#report-bugs">Report Bugs</a></li>
@@ -167,12 +195,27 @@
 <li class="toctree-l2"><a class="reference internal" href="contributing.html#pull-request-guidelines">Pull Request Guidelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="contributing.html#unit-testing-guidelines">Unit Testing Guidelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="contributing.html#tips">Tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributing.html#release-workflow">Release Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#release-workflow">Release Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#release-candidates">Release Candidates</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">History</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">0.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">0.2.2 - 2020-07-10</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#internal-imrpovements">Internal Imrpovements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#resolved-issues">Resolved Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">0.2.1 - 2020-06-16</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#internal-improvements">Internal Improvements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bug-fixes">Bug Fixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Resolved Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">0.2.0 - 2020-02-14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">0.1.0</a></li>
 </ul>
 </li>
 </ul>
@@ -241,10 +284,90 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="history">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="history">
 <h1>History<a class="headerlink" href="#history" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
-<h2>0.1.0<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>0.2.2 - 2020-07-10<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="internal-imrpovements">
+<h3>Internal Imrpovements<a class="headerlink" href="#internal-imrpovements" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Added github actions.</p></li>
+</ul>
+</div>
+<div class="section" id="resolved-issues">
+<h3>Resolved Issues<a class="headerlink" href="#resolved-issues" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Issue #27: Cache Splits pre-processed data on disk</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>0.2.1 - 2020-06-16<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>With this release we give the possibility to the user to specify more than one template when
+creating a GreenGuardPipeline. When the <code class="docutils literal notranslate"><span class="pre">tune</span></code> method of this is called, an instance of BTBSession
+is returned and it is in charge of selecting the templates and tuning their hyperparameters until
+achieving the best pipeline.</p>
+<div class="section" id="internal-improvements">
+<h3>Internal Improvements<a class="headerlink" href="#internal-improvements" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Resample by filename inside the <code class="docutils literal notranslate"><span class="pre">CSVLoader</span></code> to avoid oversampling of data that will not be used.</p></li>
+<li><p>Select targets now allows them to be equal.</p></li>
+<li><p>Fixed the csv filename format.</p></li>
+<li><p>Upgraded to BTB.</p></li>
+</ul>
+</div>
+<div class="section" id="bug-fixes">
+<h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Issue #33: Wrong default datetime format</p></li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h3>Resolved Issues<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Issue #35: Select targets is too strict</p></li>
+<li><p>Issue #36: resample by filename inside csvloader</p></li>
+<li><p>Issue #39: Upgrade BTB</p></li>
+<li><p>Issue #41: Fix CSV filename format</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>0.2.0 - 2020-02-14<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>First stable release:</p>
+<ul class="simple">
+<li><p>efficient data loading and preprocessing</p></li>
+<li><p>initial collection of dfs and lstm based pipelines</p></li>
+<li><p>optimized pipeline tuning</p></li>
+<li><p>documentation and tutorials</p></li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h2>0.1.0<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>First release on PyPI</p></li>
 </ul>

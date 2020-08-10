@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>greenguard.utils module &mdash; GreenGuard 0.2.3.dev0 documentation</title>
+  <title>greenguard.targets module &mdash; GreenGuard 0.2.3.dev0 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Contributing" href="../contributing.html" />
-    <link rel="prev" title="greenguard.targets module" href="greenguard.targets.html" /> 
+    <link rel="next" title="greenguard.utils module" href="greenguard.utils.html" />
+    <link rel="prev" title="greenguard.pipeline module" href="greenguard.pipeline.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -176,8 +176,8 @@
 <li class="toctree-l3"><a class="reference internal" href="greenguard.demo.html">greenguard.demo module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="greenguard.metrics.html">greenguard.metrics module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="greenguard.pipeline.html">greenguard.pipeline module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="greenguard.targets.html">greenguard.targets module</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">greenguard.utils module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">greenguard.targets module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="greenguard.utils.html">greenguard.utils module</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="greenguard.html#module-greenguard">Module contents</a></li>
@@ -266,14 +266,14 @@
         
           <li><a href="greenguard.html">greenguard package</a> &raquo;</li>
         
-      <li>greenguard.utils module</li>
+      <li>greenguard.targets module</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/D3-AI/GreenGuard/blob/master/docs/api/greenguard.utils.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/D3-AI/GreenGuard/blob/master/docs/api/greenguard.targets.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -311,8 +311,10 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="module-greenguard.utils">
-<span id="greenguard-utils-module"></span><h1>greenguard.utils module<a class="headerlink" href="#module-greenguard.utils" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-greenguard.targets">
+<span id="greenguard-targets-module"></span><h1>greenguard.targets module<a class="headerlink" href="#module-greenguard.targets" title="Permalink to this headline">¶</a></h1>
+<p>Targets module.</p>
+<p>This module contains functions to work with target_times.</p>
 <p><strong>Functions</strong></p>
 <table class="longtable docutils align-default">
 <colgroup>
@@ -320,47 +322,60 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#greenguard.utils.clone_pipeline" title="greenguard.utils.clone_pipeline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clone_pipeline</span></code></a>(pipeline)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#greenguard.targets.drop_duplicates" title="greenguard.targets.drop_duplicates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">drop_duplicates</span></code></a>(target_times)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#greenguard.utils.logging_setup" title="greenguard.utils.logging_setup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logging_setup</span></code></a>([verbosity, logfile, logger_name])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#greenguard.targets.make_target_times" title="greenguard.targets.make_target_times"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_target_times</span></code></a>(failure_dates, step[, …])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#greenguard.utils.remove_dots" title="greenguard.utils.remove_dots"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_dots</span></code></a>(document)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#greenguard.targets.make_targets" title="greenguard.targets.make_targets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_targets</span></code></a>(target_times, window_size, target)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#greenguard.utils.restore_dots" title="greenguard.utils.restore_dots"><code class="xref py py-obj docutils literal notranslate"><span class="pre">restore_dots</span></code></a>(document)</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#greenguard.utils.walk" title="greenguard.utils.walk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">walk</span></code></a>(document, transform)</p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#greenguard.targets.select_valid_targets" title="greenguard.targets.select_valid_targets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_valid_targets</span></code></a>(target_times, readings, …)</p></td>
+<td><p>Filter out target_times without enough data for this window_size.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="function">
-<dt id="greenguard.utils.clone_pipeline">
-<code class="sig-prename descclassname">greenguard.utils.</code><code class="sig-name descname">clone_pipeline</code><span class="sig-paren">(</span><em class="sig-param">pipeline</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/greenguard/utils.html#clone_pipeline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#greenguard.utils.clone_pipeline" title="Permalink to this definition">¶</a></dt>
+<dt id="greenguard.targets.drop_duplicates">
+<code class="sig-prename descclassname">greenguard.targets.</code><code class="sig-name descname">drop_duplicates</code><span class="sig-paren">(</span><em class="sig-param">target_times</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/greenguard/targets.html#drop_duplicates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#greenguard.targets.drop_duplicates" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="greenguard.utils.logging_setup">
-<code class="sig-prename descclassname">greenguard.utils.</code><code class="sig-name descname">logging_setup</code><span class="sig-paren">(</span><em class="sig-param">verbosity=1</em>, <em class="sig-param">logfile=None</em>, <em class="sig-param">logger_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/greenguard/utils.html#logging_setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#greenguard.utils.logging_setup" title="Permalink to this definition">¶</a></dt>
+<dt id="greenguard.targets.make_target_times">
+<code class="sig-prename descclassname">greenguard.targets.</code><code class="sig-name descname">make_target_times</code><span class="sig-paren">(</span><em class="sig-param">failure_dates</em>, <em class="sig-param">step</em>, <em class="sig-param">start=None</em>, <em class="sig-param">end=None</em>, <em class="sig-param">forecast_window=0</em>, <em class="sig-param">prediction_window=0</em>, <em class="sig-param">before=0</em>, <em class="sig-param">after=0</em>, <em class="sig-param">offset=0</em>, <em class="sig-param">max_true=None</em>, <em class="sig-param">max_false=None</em>, <em class="sig-param">shuffle=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/greenguard/targets.html#make_target_times"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#greenguard.targets.make_target_times" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="greenguard.utils.remove_dots">
-<code class="sig-prename descclassname">greenguard.utils.</code><code class="sig-name descname">remove_dots</code><span class="sig-paren">(</span><em class="sig-param">document</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/greenguard/utils.html#remove_dots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#greenguard.utils.remove_dots" title="Permalink to this definition">¶</a></dt>
+<dt id="greenguard.targets.make_targets">
+<code class="sig-prename descclassname">greenguard.targets.</code><code class="sig-name descname">make_targets</code><span class="sig-paren">(</span><em class="sig-param">target_times</em>, <em class="sig-param">window_size</em>, <em class="sig-param">target</em>, <em class="sig-param">new_targets=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/greenguard/targets.html#make_targets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#greenguard.targets.make_targets" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="greenguard.utils.restore_dots">
-<code class="sig-prename descclassname">greenguard.utils.</code><code class="sig-name descname">restore_dots</code><span class="sig-paren">(</span><em class="sig-param">document</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/greenguard/utils.html#restore_dots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#greenguard.utils.restore_dots" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="greenguard.utils.walk">
-<code class="sig-prename descclassname">greenguard.utils.</code><code class="sig-name descname">walk</code><span class="sig-paren">(</span><em class="sig-param">document</em>, <em class="sig-param">transform</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/greenguard/utils.html#walk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#greenguard.utils.walk" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="greenguard.targets.select_valid_targets">
+<code class="sig-prename descclassname">greenguard.targets.</code><code class="sig-name descname">select_valid_targets</code><span class="sig-paren">(</span><em class="sig-param">target_times</em>, <em class="sig-param">readings</em>, <em class="sig-param">window_size</em>, <em class="sig-param">rule=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/greenguard/targets.html#select_valid_targets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#greenguard.targets.select_valid_targets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter out target_times without enough data for this window_size.</p>
+<p>The table_times table is scanned and checked against the readings table
+considering the window_size. All the target times entries that do not
+have enough data are dropped.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_times</strong> (<em>pandas.DataFrame</em>) – Target times table, with at least turbined_id and cutoff_time fields.</p></li>
+<li><p><strong>readings</strong> (<em>pandas.DataFrame</em>) – Readings table, with at least turbine_id, signal_id, and timestamp ields.</p></li>
+<li><p><strong>window_size</strong> (<em>str</em><em> or </em><em>pandas.TimeDelta</em>) – TimeDelta specification that indicates the lenght of the training window.</p></li>
+<li><p><strong>rule</strong> (<em>str</em><em> or </em><em>pandas.TimeDelta</em>) – Resampling rule specification. If given, add that to the max timestamp
+to ensure the period is completely covered.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>New target_times table without the invalid targets.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 
@@ -372,10 +387,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="greenguard.utils.html" class="btn btn-neutral float-right" title="greenguard.utils module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="greenguard.targets.html" class="btn btn-neutral float-left" title="greenguard.targets module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="greenguard.pipeline.html" class="btn btn-neutral float-left" title="greenguard.pipeline module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

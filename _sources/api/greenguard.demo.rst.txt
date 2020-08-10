@@ -1,0 +1,7 @@
+greenguard.demo module
+======================
+
+.. automodule:: greenguard.demo
+   :members:
+   :undoc-members:
+   :show-inheritance:

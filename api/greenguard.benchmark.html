@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>greenguard.benchmark module &mdash; GreenGuard 0.2.3.dev0 documentation</title>
+  <title>greenguard.benchmark module &mdash; GreenGuard 0.2.4.dev0 documentation</title>
   
 
   
@@ -84,15 +84,18 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../readme.html">GreenGuard</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../readme.html#overview">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">GreenGuard</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../readme.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../readme.html#resources">Resources</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../readme.html#install">Install</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../readme.html#requirements">Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../readme.html#download-and-install">Download and Install</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../readme.html#docker-usage">Docker usage</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../readme.html#data-format">Data Format</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#id1">Data Format</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../readme.html#target-times">Target Times</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../readme.html#readings">Readings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../readme.html#turbines">Turbines</a></li>
@@ -204,19 +207,20 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../authors.html">Credits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../history.html">History</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../history.html#id1">0.2.2 - 2020-07-10</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../history.html#id1">0.2.3 - 2020-08-10</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../history.html#id2">0.2.2 - 2020-07-10</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../history.html#internal-imrpovements">Internal Imrpovements</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../history.html#resolved-issues">Resolved Issues</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../history.html#id2">0.2.1 - 2020-06-16</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../history.html#id3">0.2.1 - 2020-06-16</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../history.html#internal-improvements">Internal Improvements</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../history.html#bug-fixes">Bug Fixes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../history.html#id3">Resolved Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../history.html#id4">Resolved Issues</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../history.html#id4">0.2.0 - 2020-02-14</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../history.html#id5">0.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../history.html#id5">0.2.0 - 2020-02-14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../history.html#id6">0.1.0</a></li>
 </ul>
 </li>
 </ul>
@@ -313,7 +317,22 @@
 </style>
 <div class="section" id="module-greenguard.benchmark">
 <span id="greenguard-benchmark-module"></span><h1>greenguard.benchmark module<a class="headerlink" href="#module-greenguard.benchmark" title="Permalink to this headline">¶</a></h1>
-<p><strong>Functions</strong></p>
+<p><strong>Classes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">GreenGuardPipeline</span></code>(templates[, metric, …])</p></td>
+<td><p>Main Machine Learning component in the GreenGuard project.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">product</span></code></p></td>
+<td><p>product(<a href="#id1"><span class="problematic" id="id2">*</span></a>iterables, repeat=1) –&gt; product object</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions:</strong></p>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -326,11 +345,23 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#greenguard.benchmark.evaluate_templates" title="greenguard.benchmark.evaluate_templates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate_templates</span></code></a>(templates, window_size_rule)</p></td>
 <td><p>Execute the benchmark process and optionally store the result as a <code class="docutils literal notranslate"><span class="pre">CSV</span></code>.</p></td>
 </tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_init_params</span></code>(template_names, init_params)</p></td>
+<td><p>Generate init_params dicts.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_preprocessing</span></code>(templates_names, …)</p></td>
+<td><p>Generate preprocessing dict.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_demo</span></code>([load_readings])</p></td>
+<td><p>Load the demo included in the GreenGuard project.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">train_test_split</span></code>(*arrays, **options)</p></td>
+<td><p>Split arrays or matrices into random train and test subsets</p></td>
+</tr>
 </tbody>
 </table>
 <dl class="function">
 <dt id="greenguard.benchmark.evaluate_template">
-<code class="sig-prename descclassname">greenguard.benchmark.</code><code class="sig-name descname">evaluate_template</code><span class="sig-paren">(</span><em class="sig-param">template</em>, <em class="sig-param">target_times</em>, <em class="sig-param">readings</em>, <em class="sig-param">metric='f1'</em>, <em class="sig-param">tuning_iterations=50</em>, <em class="sig-param">preprocessing=0</em>, <em class="sig-param">init_params=None</em>, <em class="sig-param">cost=False</em>, <em class="sig-param">test_size=0.25</em>, <em class="sig-param">cv_splits=3</em>, <em class="sig-param">random_state=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/greenguard/benchmark.html#evaluate_template"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#greenguard.benchmark.evaluate_template" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">greenguard.benchmark.</code><code class="sig-name descname">evaluate_template</code><span class="sig-paren">(</span><em class="sig-param">template</em>, <em class="sig-param">target_times</em>, <em class="sig-param">readings</em>, <em class="sig-param">metric='f1'</em>, <em class="sig-param">tuning_iterations=50</em>, <em class="sig-param">preprocessing=0</em>, <em class="sig-param">init_params=None</em>, <em class="sig-param">cost=False</em>, <em class="sig-param">test_size=0.25</em>, <em class="sig-param">cv_splits=3</em>, <em class="sig-param">random_state=0</em>, <em class="sig-param">cache_path=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/greenguard/benchmark.html#evaluate_template"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#greenguard.benchmark.evaluate_template" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the scores for a given template.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -370,6 +401,8 @@ defined in the <code class="docutils literal notranslate"><span class="pre">gree
 <li><p><strong>test_size</strong> (<em>float</em>) – Percentage of the data set to be used for the test.</p></li>
 <li><p><strong>cv_splits</strong> (<em>int</em>) – Amount of splits to create.</p></li>
 <li><p><strong>random_state</strong> (<em>int</em>) – Random number of train_test split.</p></li>
+<li><p><strong>cache_path</strong> (<em>str</em>) – If given, cache the generated cross validation splits in this folder.
+Defatuls to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -383,7 +416,7 @@ defined in the <code class="docutils literal notranslate"><span class="pre">gree
 
 <dl class="function">
 <dt id="greenguard.benchmark.evaluate_templates">
-<code class="sig-prename descclassname">greenguard.benchmark.</code><code class="sig-name descname">evaluate_templates</code><span class="sig-paren">(</span><em class="sig-param">templates</em>, <em class="sig-param">window_size_rule</em>, <em class="sig-param">metric='f1'</em>, <em class="sig-param">tuning_iterations=50</em>, <em class="sig-param">init_params=None</em>, <em class="sig-param">target_times=None</em>, <em class="sig-param">readings=None</em>, <em class="sig-param">preprocessing=0</em>, <em class="sig-param">cost=False</em>, <em class="sig-param">test_size=0.25</em>, <em class="sig-param">cv_splits=3</em>, <em class="sig-param">random_state=0</em>, <em class="sig-param">output_path=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/greenguard/benchmark.html#evaluate_templates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#greenguard.benchmark.evaluate_templates" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">greenguard.benchmark.</code><code class="sig-name descname">evaluate_templates</code><span class="sig-paren">(</span><em class="sig-param">templates</em>, <em class="sig-param">window_size_rule</em>, <em class="sig-param">metric='f1'</em>, <em class="sig-param">tuning_iterations=50</em>, <em class="sig-param">init_params=None</em>, <em class="sig-param">target_times=None</em>, <em class="sig-param">readings=None</em>, <em class="sig-param">preprocessing=0</em>, <em class="sig-param">cost=False</em>, <em class="sig-param">test_size=0.25</em>, <em class="sig-param">cv_splits=3</em>, <em class="sig-param">random_state=0</em>, <em class="sig-param">cache_path=None</em>, <em class="sig-param">output_path=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/greenguard/benchmark.html#evaluate_templates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#greenguard.benchmark.evaluate_templates" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute the benchmark process and optionally store the result as a <code class="docutils literal notranslate"><span class="pre">CSV</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -425,6 +458,8 @@ pipeline.</p>
 <li><p><strong>cv_splits</strong> (<em>int</em>) – Amount of splits to create.</p></li>
 <li><p><strong>random_state</strong> (<em>int</em>) – Random number of train_test split.</p></li>
 <li><p><strong>output_path</strong> (<em>str</em>) – Path where to save the benchmark report.</p></li>
+<li><p><strong>cache_path</strong> (<em>str</em>) – If given, cache the generated cross validation splits in this folder.
+Defatuls to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
